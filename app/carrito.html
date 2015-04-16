@@ -1,0 +1,28 @@
+<div ng-if="snipet">
+ Esto es el snipet {{carritoCtrl.carrito.total}}
+    <div>
+        <button  ng-click="carritoCtrl.comprar()">Comprar</button>
+    </div>
+</div>
+
+<div ng-if="!snipet"><!--Esto solo es a para tener una lista de productos disponible, hay que sacarlo en producción-->
+<!--el botón de comprar debe invocar a un servicio y le pasa el producto completo-->
+<div ng-repeat="producto in carritoCtrl.productosMockUp">
+    <div >{{producto.producto_id}} {{producto.precios[0].precio}} <button ng-click="carritoCtrl.addProducto(producto)">comprar</button> </div>
+</div>
+
+<!--<div ng-click="carritoCtrl.remover()">remover</div>-->
+
+<div>
+    <div ng-repeat="producto in carritoCtrl.productosCarrito">{{producto.nombre}}
+        <input ng-change="(producto.cantidad<0)?producto.cantidad=0:producto.cantidad; carritoCtrl.calcularTotal();"
+               type="number" ng-model="producto.cantidad"/><button ng-click="carritoCtrl.removerProducto($index);">Remover</button></div>
+</div>
+<div>
+    {{carritoCtrl.carrito.total}}
+
+</div>
+    <div>
+        <button ng-click="carritoCtrl.comprar()">Comprar</button>
+    </div>
+</div>
