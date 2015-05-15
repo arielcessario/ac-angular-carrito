@@ -319,7 +319,7 @@
                     var n = elemUpper.indexOf(name.toUpperCase());
 
                     if (n === undefined || n === -1) {
-                        n = elem.nombre.indexOf(name);
+                        n = elem.descripcion.indexOf(name);
                     }
 
                     if (n !== undefined && n > -1) {
