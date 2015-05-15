@@ -291,6 +291,7 @@
         service.getProductosDestacados = getProductosDestacados;
         service.getProductosMasVendidos = getProductosMasVendidos;
         service.getProductoById = getProductoById;
+        service.getProductoByName = getProductoByName;
         service.getProductosByCategoria = getProductosByCategoria;
         service.getOfertas = getOfertas;
         service.getOfertasById = getOfertasById;
@@ -299,6 +300,7 @@
 
 
         return service;
+
         function getProductos(callback) {
             return $http.post(url, {function: 'getProductos'}, {cache: true})
                 .success(function (data) {
@@ -306,6 +308,27 @@
                 })
                 .error(function (data) {
                 });
+        }
+
+        function getProductoByName(name, callback) {
+            getProductos(function (data) {
+                //console.log(data);
+                var response = data.filter(function (elem) {
+                    var elemUpper = elem.nombre.toUpperCase();
+
+                    var n = elemUpper.indexOf(name.toUpperCase());
+
+                    if (n === undefined || n === -1) {
+                        n = elem.nombre.indexOf(name);
+                    }
+
+                    if (n !== undefined && n > -1) {
+                        return elem;
+                    }
+                });
+                callback(response);
+            })
+
         }
 
         function getProductoById(id, callback){
