@@ -13,14 +13,21 @@ $data = file_get_contents("php://input");
 
 $decoded = json_decode($data);
 
-if ($decoded->function == 'getProductos') {
-    getProductos();
-} else if ($decoded->function == 'getOfertas') {
-    getOfertas();
-} else if ($decoded->function == 'getKits') {
-    getKits();
-}
 
+if($decoded != null) {
+    if ($decoded->function == 'getProductos') {
+        getProductos();
+    } else if ($decoded->function == 'getOfertas') {
+        getOfertas();
+    } else if ($decoded->function == 'getKits') {
+        getKits();
+    }
+}else{
+    $function = $_GET["function"];
+    if ($function == 'getProductos') {
+        getProductos();
+    }
+}
 
 function getProductos()
 {
