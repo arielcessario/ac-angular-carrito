@@ -302,12 +302,20 @@
         return service;
 
         function getProductos(callback) {
-            return $http.post(url, {function: 'getProductos'}, {cache: true})
+            return $http.get(url+'?function=getProductos', {cache:true})
                 .success(function (data) {
                     callback(data);
                 })
                 .error(function (data) {
                 });
+
+
+            //return $http.post(url, {function: 'getProductos'}, {cache: true})
+            //    .success(function (data) {
+            //        callback(data);
+            //    })
+            //    .error(function (data) {
+            //    });
         }
 
         function getProductoByName(name, callback) {
