@@ -97,9 +97,11 @@
                     } else {
                         acAngularCarritoService.getCarrito(carritoCookie.carrito_id,
                             function (data) {
+
+
                                 vm.carrito.carrito_id = data[0].carrito_id;
                                 vm.carrito.status = data[0].status;
-                                vm.carrito.total = parseFloat(data[0].total);
+                                vm.carrito.total = (vm.carrito.total !== 0.0 && vm.productosCarrito.length>0)?vm.carrito.total:parseFloat(data[0].total);
                                 //vm.detalles = data[0].detalles;
                                 vm.carrito.fecha = '';
                                 $cookieStore.put('carritoCookie', vm.carrito);
