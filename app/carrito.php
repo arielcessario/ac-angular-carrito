@@ -24,7 +24,7 @@ if ($decoded->function == 'getProductos') {
 }elseif ($decoded->function == 'confirmarCarrito') {
     confirmarCarrito($decoded->carrito);
 }elseif ($decoded->function == 'nuevoCarrito') {
-    nuevoCarrito();
+    nuevoCarrito($decoded->userid);
 }elseif ($decoded->function == 'cancelarCarrito') {
     cancelarCarrito($decoded->carrito);
 }elseif ($decoded->function == 'getCarrito') {
@@ -146,9 +146,9 @@ function confirmarCarrito($carrito){
         echo $res;
     }
 }
-function nuevoCarrito(){
+function nuevoCarrito($userid){
     $db = new MysqliDb();
-    $data = array('status' => 1, 'total' => 0.0);
+    $data = array('cliente_id'=> $userid, 'status' => 1, 'total' => 0.0);
 
 //    $results = $db->rawQuery('insert into carritos(status,total) values(1,0.0)');
     $results = $db->insert('carritos', $data);

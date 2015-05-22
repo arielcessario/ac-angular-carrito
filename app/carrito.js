@@ -36,7 +36,7 @@
                 vm.calcularTotal = calcularTotal;
                 vm.comprar = comprar;
 
-                ceckCarritoCokie();
+                ceckCarritoCookie();
 
                 //acAngularProductosService.getProductos(
                 //    function (data) {
@@ -72,11 +72,20 @@
 
                 }
 
-                function ceckCarritoCokie() {
+                function ceckCarritoCookie() {
+
+                    var loggedCookie = $cookieStore.get('app.userlogged');
+
+                    //chequear si el usuario está loggeado, sino pedirle loggin
+                    if(loggedCookie === undefined || loggedCookie.userid === undefined || loggedCookie.userid === -1){
+                        return false;
+                    }
+
+
                     var carritoCookie = $cookieStore.get('carritoCookie');
                     if (carritoCookie === undefined ||
                         carritoCookie.carrito_id === undefined) {
-                        acAngularCarritoService.nuevoCarrito(
+                        acAngularCarritoService.nuevoCarrito(loggedCookie.userid,
                             function (data) {
                                 vm.carrito.carrito_id = data.results;
                                 vm.carrito.status = 1;
@@ -134,7 +143,13 @@
 
         function comprar() {
 
+            var loggedCookie = $cookieStore.get('app.userlogged');
+
             //chequear si el usuario está loggeado, sino pedirle loggin
+            if(loggedCookie === undefined || loggedCookie.userid === undefined || loggedCookie.userid === -1){
+                return false;
+            }
+
             acAngularCarritoTotalService.carrito.detalles = acAngularCarritoTotalService.productosCarrito;
 
 
@@ -240,8 +255,8 @@
                 });
         }
 
-        function nuevoCarrito(callback) {
-            return $http.post(url, {function: 'nuevoCarrito'})
+        function nuevoCarrito(userid, callback) {
+            return $http.post(url, {function: 'nuevoCarrito', userid: userid})
                 .success(function (data) {
                     callback(data);
                 })
