@@ -133,6 +133,11 @@
 
     AcAngularCarritoServiceAcciones.$inject = ['$cookieStore', 'acAngularCarritoTotalService', 'acAngularCarritoService'];
     function AcAngularCarritoServiceAcciones($cookieStore, acAngularCarritoTotalService, acAngularCarritoService) {
+        var vm = this;
+        vm.productosMockUp = [];
+        vm.productosCarrito = acAngularCarritoTotalService.productosCarrito;
+        vm.carrito = acAngularCarritoTotalService.carrito;
+
         var service = {};
         service.addProducto = addProducto;
         service.calcularTotal = calcularTotal;
@@ -148,6 +153,32 @@
             //chequear si el usuario está loggeado, sino pedirle loggin
             if(loggedCookie === undefined || loggedCookie.userid === undefined || loggedCookie.userid === -1){
                 return false;
+            }
+
+
+            var carritoCookie = $cookieStore.get('carritoCookie');
+            if (carritoCookie === undefined ||
+                carritoCookie.carrito_id === undefined) {
+                acAngularCarritoService.nuevoCarrito(loggedCookie.userid,
+                    function (data) {
+                        vm.carrito.carrito_id = data.results;
+                        vm.carrito.status = 1;
+                        vm.carrito.total = 0.0;
+                        vm.carrito.fecha = '';
+                        $cookieStore.put('carritoCookie', vm.carrito);
+                    }
+                );
+            } else {
+                acAngularCarritoService.getCarrito(carritoCookie.carrito_id,
+                    function (data) {
+                        vm.carrito.carrito_id = data[0].carrito_id;
+                        vm.carrito.status = data[0].status;
+                        vm.carrito.total = parseFloat(data[0].total);
+                        //vm.detalles = data[0].detalles;
+                        vm.carrito.fecha = '';
+                        $cookieStore.put('carritoCookie', vm.carrito);
+                    });
+                //$cookies.put();
             }
 
             acAngularCarritoTotalService.carrito.detalles = acAngularCarritoTotalService.productosCarrito;
