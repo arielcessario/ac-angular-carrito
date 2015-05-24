@@ -75,7 +75,7 @@
                     var loggedCookie = $cookieStore.get('app.userlogged');
 
                     //chequear si el usuario está loggeado, sino pedirle loggin
-                    if (loggedCookie === undefined || loggedCookie.userid === undefined || loggedCookie.userid === -1) {
+                    if (loggedCookie === undefined || loggedCookie.cliente === undefined) {
                         return false;
                     }
 
