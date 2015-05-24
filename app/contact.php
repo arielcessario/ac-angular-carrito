@@ -13,7 +13,7 @@ function sendMail($email, $nombre, $mensaje, $asunto, $sucursal)
     $detalles = '';
 
     foreach ($productos->detalles as $item) {
-        $detalles = '<tr><td>' . $item->nombre . '</td><td>' . $item->cantidad . '</td></tr>';
+        $detalles = $detalles . '<tr><td>' . $item->nombre . '</td><td>' . $item->cantidad . '</td></tr>';
     }
 
 
