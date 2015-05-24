@@ -56,7 +56,7 @@
 
 
                 function comprar() {
-                    acAngularCarritoServiceAcciones.comprar();
+                    acAngularCarritoServiceAcciones.comprar(function(data){console.log(data);});
                 }
 
                 function addProducto(producto) {
@@ -146,7 +146,7 @@
 
         return service;
 
-        function comprar() {
+        function comprar(callback) {
 
             var loggedCookie = $cookieStore.get('app.userlogged');
 
@@ -178,6 +178,7 @@
                                 $cookieStore.remove('carritoCookie');
                                 acAngularCarritoTotalService.carrito = {};
                                 acAngularCarritoTotalService.productosCarrito = [];
+                                callback(data);
                             });
 
                     }
@@ -204,6 +205,7 @@
                                 $cookieStore.remove('carritoCookie');
                                 acAngularCarritoTotalService.carrito = {};
                                 acAngularCarritoTotalService.productosCarrito = [];
+                                callback(data);
                             });
 
                     });
