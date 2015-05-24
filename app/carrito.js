@@ -183,14 +183,15 @@
 
                                 acAngularCarritoService.enviarDetalleCarrito(loggedCookie.cliente[0],
                                     acAngularCarritoTotalService.carrito,sucursal, function (data) {
-                                        console.log(data);
+                                        //console.log(data);
+                                        //console.log(acAngularCarritoTotalService.carrito);
+                                        $cookieStore.remove('carritoCookie');
+                                        acAngularCarritoTotalService.carrito = {};
+                                        acAngularCarritoTotalService.productosCarrito = [];
+                                        callback(data);
                                     });
 
-                                //console.log(acAngularCarritoTotalService.carrito);
-                                $cookieStore.remove('carritoCookie');
-                                acAngularCarritoTotalService.carrito = {};
-                                acAngularCarritoTotalService.productosCarrito = [];
-                                callback(data);
+
                             });
 
                     }
@@ -216,14 +217,15 @@
 
                                 acAngularCarritoService.enviarDetalleCarrito(loggedCookie.cliente[0],
                                     acAngularCarritoTotalService.carrito, sucursal, function (data) {
-                                        console.log(data);
-                                    })
+                                        //console.log(data);
+                                        //console.log(acAngularCarritoTotalService.carrito);
+                                        $cookieStore.remove('carritoCookie');
+                                        acAngularCarritoTotalService.carrito = {};
+                                        acAngularCarritoTotalService.productosCarrito = [];
+                                        callback(data);
+                                    });
 
-                                //console.log(acAngularCarritoTotalService.carrito);
-                                $cookieStore.remove('carritoCookie');
-                                acAngularCarritoTotalService.carrito = {};
-                                acAngularCarritoTotalService.productosCarrito = [];
-                                callback(data);
+
                             });
 
                     });

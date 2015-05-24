@@ -72,7 +72,7 @@ function sendMail($email, $nombre, $mensaje, $asunto, $sucursal)
 //    mail("arielcessario@gmail.com", $asunto, $mensaje, "From: $email\n");
 //    echo ($email . $nombre . $mensaje . $asunto);
 
-    print_r($productos);
+//    print_r($productos);
 }
 
 
