@@ -314,7 +314,7 @@
 
         function enviarDetalleCarrito(cliente, carrito, callback){
             return $http.post(url_enviar,
-                {'email': cliente.email, 'nombre': cliente.nombre + ' ' + cliente.apellido, 'mensaje': JSON.stringify(carrito), 'asunto': 'Nueva Compra por la página'})
+                {'email': cliente.mail, 'nombre': cliente.nombre + ' ' + cliente.apellido, 'mensaje': JSON.stringify(carrito), 'asunto': 'Nueva Compra por la página'})
                 .success(
                 function (data) {
                     callback(data);
