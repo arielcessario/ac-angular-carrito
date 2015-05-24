@@ -30,6 +30,12 @@
                 var vm = this;
                 vm.productosMockUp = [];
                 vm.productosCarrito = acAngularCarritoTotalService.productosCarrito;
+                $scope.productosCarrito = acAngularCarritoTotalService.productosCarrito;
+
+                $scope.$watch('productosCarrito', function(newValue, oldValue){
+                    vm.productosCarrito = newValue;
+                });
+
                 vm.carrito = acAngularCarritoTotalService.carrito;
 
                 vm.addProducto = addProducto;
