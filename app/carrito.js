@@ -9,6 +9,7 @@
         .directive('acAngularCarrito', AcAngularCarrito)
         .factory('acAngularCarritoService', AcAngularCarritoService)
         .factory('acAngularProductosService', AcAngularProductosService)
+        .factory('acAngularSucursalesService', AcAngularSucursalesService)
         .factory('acAngularCarritoServiceAcciones', AcAngularCarritoServiceAcciones)
         .service('acAngularCarritoTotalService', AcAngularCarritoTotalService)
     ;
@@ -124,12 +125,10 @@
         };
     }
 
-
     function AcAngularCarritoTotalService() {
         this.carrito = {};
         this.productosCarrito = [];
     }
-
 
     AcAngularCarritoServiceAcciones.$inject = ['$cookieStore', 'acAngularCarritoTotalService', 'acAngularCarritoService'];
     function AcAngularCarritoServiceAcciones($cookieStore, acAngularCarritoTotalService, acAngularCarritoService) {
@@ -146,7 +145,7 @@
 
         return service;
 
-        function comprar(callback) {
+        function comprar(sucursal, callback) {
 
             var loggedCookie = $cookieStore.get('app.userlogged');
 
@@ -395,6 +394,7 @@
         service.getKitById = getKitById;
 
 
+
         return service;
 
         function getProductos(callback) {
@@ -541,5 +541,25 @@
         }
 
 
+    }
+
+
+    AcAngularSucursalesService.$inject = ['$http'];
+    function AcAngularSucursalesService($http){
+        var url = currentScriptPath.replace('carrito.js', 'productos.php');
+        var service = {};
+        service.getSucursales = getSucursales;
+
+        return service;
+
+        function getSucursales(callback) {
+            return $http.get(url + '?function=getSucursales', {cache: true})
+                .success(function (data) {
+                    callback(data);
+                })
+                .error(function (data) {
+                });
+
+        }
     }
 })();

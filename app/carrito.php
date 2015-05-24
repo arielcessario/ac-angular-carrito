@@ -29,6 +29,15 @@ if ($decoded->function == 'getProductos') {
     cancelarCarrito($decoded->carrito);
 }elseif ($decoded->function == 'getCarrito') {
     getCarrito($decoded->carrito);
+}elseif ($decoded->function == 'getSucursales') {
+    getSucursales();
+}
+
+
+function getSucursales(){
+    $db = new MysqliDb();
+    $results = $db->get('sucursales');
+    echo json_encode($results);
 }
 
 
