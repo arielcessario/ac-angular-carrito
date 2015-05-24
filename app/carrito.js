@@ -159,7 +159,7 @@
             var carritoCookie = $cookieStore.get('carritoCookie');
             if (carritoCookie === undefined ||
                 carritoCookie.carrito_id === undefined) {
-                acAngularCarritoService.nuevoCarrito(loggedCookie.userid,
+                acAngularCarritoService.nuevoCarrito(loggedCookie.cliente[0].cliente_id,
                     function (data) {
                         vm.carrito.carrito_id = data.results;
                         vm.carrito.status = 1;
