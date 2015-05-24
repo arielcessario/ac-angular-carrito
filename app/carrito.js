@@ -174,6 +174,9 @@
                             function (data) {
                                 //console.log(data);
 
+                                acAngularCarritoService.enviarDetalleCarrito(loggedCookie.cliente[0],
+                                    acAngularCarritoTotalService.carrito, function(data){console.log(data);})
+
                                 //console.log(acAngularCarritoTotalService.carrito);
                                 $cookieStore.remove('carritoCookie');
                                 acAngularCarritoTotalService.carrito = {};
@@ -200,6 +203,10 @@
                         acAngularCarritoService.confirmarCarrito(acAngularCarritoTotalService.carrito,
                             function (data) {
                                 //console.log(data);
+
+
+                                acAngularCarritoService.enviarDetalleCarrito(loggedCookie.cliente[0],
+                                    acAngularCarritoTotalService.carrito, function(data){console.log(data);})
 
                                 //console.log(acAngularCarritoTotalService.carrito);
                                 $cookieStore.remove('carritoCookie');
@@ -253,6 +260,7 @@
     function AcAngularCarritoService($http) {
 
         var url = currentScriptPath.replace('.js', '.php');
+        var url_enviar = currentScriptPath.replace('carrito.js', 'contact.php');
         var service = {};
         //service.addProducto = addProducto;
         service.removeProducto = removeProducto;
@@ -261,6 +269,7 @@
         service.cancelarCarrito = cancelarCarrito;
         service.getCarrito = getCarrito;
         service.updateStock = updateStock;
+        service.enviarDetalleCarrito = enviarDetalleCarrito;
 
         return service;
 
@@ -301,6 +310,29 @@
                     callback(data);
                 })
                 .error(function (data) {
+                });
+        }
+
+        function enviarDetalleCarrito(cliente, carrito, callback){
+            return $http.post(url_enviar,
+                {'email': cliente.email, 'nombre': cliente.nombre + ' ' + cliente.apellido, 'mensaje': carrito, 'asunto': 'Nueva Compra por la página'})
+                .success(
+                function (data) {
+                    callback(data);
+                    //console.log(data);
+                    //vm.enviado = true;
+                    //$timeout(hideMessage, 3000);
+                    //function hideMessage(){
+                    //    vm.enviado = false;
+                    //}
+                    //
+                    //vm.email = '';
+                    //vm.nombre = '';
+                    //vm.mensaje = '';
+                    //vm.asunto = '';
+                })
+                .error(function (data) {
+                    console.log(data);
                 });
         }
 
