@@ -30,11 +30,19 @@
                 var vm = this;
                 vm.productosMockUp = [];
                 vm.productosCarrito = acAngularCarritoTotalService.productosCarrito;
-                $scope.productosCarrito = acAngularCarritoTotalService.productosCarrito;
+                //$scope.productosCarrito = acAngularCarritoTotalService.productosCarrito;
+                //
+                //$scope.$watch('productosCarrito', function(newValue, oldValue){
+                //    vm.productosCarrito = newValue;
+                //});
 
-                $scope.$watch('productosCarrito', function(newValue, oldValue){
-                    vm.productosCarrito = newValue;
+
+
+                $scope.$on('ActualizaCarrito', function() {
+                    vm.productosCarrito = acAngularCarritoTotalService.productosCarrito;
+                    vm.carrito = acAngularCarritoTotalService.carrito;
                 });
+
 
                 vm.carrito = acAngularCarritoTotalService.carrito;
 
@@ -99,6 +107,7 @@
                                 vm.carrito.total = (vm.carrito.total !== 0.0 && vm.productosCarrito.length > 0) ? vm.carrito.total : parseFloat(data[0].total);
                                 vm.carrito.fecha = '';
                                 $cookieStore.put('carritoCookie', vm.carrito);
+                                $broadcast('ActualizaCarrito');
                             }
                         );
                     } else {
@@ -112,6 +121,7 @@
                                 //vm.detalles = data[0].detalles;
                                 vm.carrito.fecha = '';
                                 $cookieStore.put('carritoCookie', vm.carrito);
+                                $broadcast('ActualizaCarrito');
                             });
                         //$cookies.put();
                     }
@@ -189,6 +199,7 @@
                                         acAngularCarritoTotalService.carrito = {};
                                         acAngularCarritoTotalService.productosCarrito = [];
                                         callback(data);
+                                        $broadcast('ActualizaCarrito');
                                     });
 
 
@@ -223,6 +234,7 @@
                                         acAngularCarritoTotalService.carrito = {};
                                         acAngularCarritoTotalService.productosCarrito = [];
                                         callback(data);
+                                        $broadcast('ActualizaCarrito');
                                     });
 
 
