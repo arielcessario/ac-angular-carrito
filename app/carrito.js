@@ -96,7 +96,7 @@
                             function (data) {
                                 vm.carrito.carrito_id = data.results;
                                 vm.carrito.status = 1;
-                                vm.carrito.total = 0.0;
+                                vm.carrito.total = (vm.carrito.total !== 0.0 && vm.productosCarrito.length > 0) ? vm.carrito.total : parseFloat(data[0].total);
                                 vm.carrito.fecha = '';
                                 $cookieStore.put('carritoCookie', vm.carrito);
                             }
@@ -170,7 +170,7 @@
                     function (data) {
                         vm.carrito.carrito_id = data.results;
                         vm.carrito.status = 1;
-                        vm.carrito.total = 0.0;
+                        vm.carrito.total = (vm.carrito.total !== 0.0 && acAngularCarritoTotalService.productosCarrito.length > 0) ? vm.carrito.total : parseFloat(data[0].total);;
                         vm.carrito.fecha = '';
                         $cookieStore.put('carritoCookie', vm.carrito);
 
