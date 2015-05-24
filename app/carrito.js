@@ -148,8 +148,8 @@
         this.productosCarrito = [];
     }
 
-    AcAngularCarritoServiceAcciones.$inject = ['$cookieStore', 'acAngularCarritoTotalService', 'acAngularCarritoService', '$scope'];
-    function AcAngularCarritoServiceAcciones($cookieStore, acAngularCarritoTotalService, acAngularCarritoService, $scope) {
+    AcAngularCarritoServiceAcciones.$inject = ['$cookieStore', 'acAngularCarritoTotalService', 'acAngularCarritoService', '$rootScope'];
+    function AcAngularCarritoServiceAcciones($cookieStore, acAngularCarritoTotalService, acAngularCarritoService, $rootScope) {
         var vm = this;
         vm.productosMockUp = [];
         vm.productosCarrito = acAngularCarritoTotalService.productosCarrito;
@@ -199,7 +199,7 @@
                                         acAngularCarritoTotalService.carrito = {};
                                         acAngularCarritoTotalService.productosCarrito = [];
                                         callback(data);
-                                        $scope.$broadcast('ActualizaCarrito');
+                                        $rootScope.$broadcast('ActualizaCarrito');
                                     });
 
 
@@ -234,7 +234,7 @@
                                         acAngularCarritoTotalService.carrito = {};
                                         acAngularCarritoTotalService.productosCarrito = [];
                                         callback(data);
-                                        $scope.$broadcast('ActualizaCarrito');
+                                        $rootScope.$broadcast('ActualizaCarrito');
                                     });
 
 
