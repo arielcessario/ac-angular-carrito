@@ -15,7 +15,7 @@
 
 
     AcAngularCarrito.$inject = ['$location', '$route', '$cookieStore', 'acAngularCarritoService', 'acAngularCarritoServiceAcciones', 'acAngularCarritoTotalService',
-    'acAngularProductosService'];
+        'acAngularProductosService'];
     function AcAngularCarrito($location, $route, $cookieStore, acAngularCarritoService, acAngularCarritoServiceAcciones, acAngularCarritoTotalService,
                               acAngularProductosService) {
         return {
@@ -55,8 +55,6 @@
                 //acAngularProductosService.getProductosByCategoria(11, function(data){console.log(data);});
 
 
-
-
                 function comprar() {
                     acAngularCarritoServiceAcciones.comprar();
                 }
@@ -77,7 +75,7 @@
                     var loggedCookie = $cookieStore.get('app.userlogged');
 
                     //chequear si el usuario está loggeado, sino pedirle loggin
-                    if(loggedCookie === undefined || loggedCookie.userid === undefined || loggedCookie.userid === -1){
+                    if (loggedCookie === undefined || loggedCookie.userid === undefined || loggedCookie.userid === -1) {
                         return false;
                     }
 
@@ -101,7 +99,7 @@
 
                                 vm.carrito.carrito_id = data[0].carrito_id;
                                 vm.carrito.status = data[0].status;
-                                vm.carrito.total = (vm.carrito.total !== 0.0 && vm.productosCarrito.length>0)?vm.carrito.total:parseFloat(data[0].total);
+                                vm.carrito.total = (vm.carrito.total !== 0.0 && vm.productosCarrito.length > 0) ? vm.carrito.total : parseFloat(data[0].total);
                                 //vm.detalles = data[0].detalles;
                                 vm.carrito.fecha = '';
                                 $cookieStore.put('carritoCookie', vm.carrito);
@@ -153,7 +151,7 @@
             var loggedCookie = $cookieStore.get('app.userlogged');
 
             //chequear si el usuario está loggeado, sino pedirle loggin
-            if(loggedCookie === undefined || loggedCookie.userid === undefined || loggedCookie.userid === -1){
+            if (loggedCookie === undefined || loggedCookie.userid === undefined || loggedCookie.userid === -1) {
                 return false;
             }
 
@@ -168,6 +166,20 @@
                         vm.carrito.total = 0.0;
                         vm.carrito.fecha = '';
                         $cookieStore.put('carritoCookie', vm.carrito);
+
+                        acAngularCarritoTotalService.carrito.detalles = acAngularCarritoTotalService.productosCarrito;
+
+
+                        acAngularCarritoService.confirmarCarrito(acAngularCarritoTotalService.carrito,
+                            function (data) {
+                                //console.log(data);
+
+                                //console.log(acAngularCarritoTotalService.carrito);
+                                $cookieStore.remove('carritoCookie');
+                                acAngularCarritoTotalService.carrito = {};
+                                acAngularCarritoTotalService.productosCarrito = [];
+                            });
+
                     }
                 );
             } else {
@@ -179,22 +191,24 @@
                         //vm.detalles = data[0].detalles;
                         vm.carrito.fecha = '';
                         $cookieStore.put('carritoCookie', vm.carrito);
+
+
+                        acAngularCarritoTotalService.carrito.detalles = acAngularCarritoTotalService.productosCarrito;
+
+
+                        acAngularCarritoService.confirmarCarrito(acAngularCarritoTotalService.carrito,
+                            function (data) {
+                                //console.log(data);
+
+                                //console.log(acAngularCarritoTotalService.carrito);
+                                $cookieStore.remove('carritoCookie');
+                                acAngularCarritoTotalService.carrito = {};
+                                acAngularCarritoTotalService.productosCarrito = [];
+                            });
+
                     });
                 //$cookies.put();
             }
-
-            acAngularCarritoTotalService.carrito.detalles = acAngularCarritoTotalService.productosCarrito;
-
-
-            acAngularCarritoService.confirmarCarrito(acAngularCarritoTotalService.carrito,
-                function (data) {
-                    //console.log(data);
-
-                    //console.log(acAngularCarritoTotalService.carrito);
-                    $cookieStore.remove('carritoCookie');
-                    acAngularCarritoTotalService.carrito = {};
-                    acAngularCarritoTotalService.productosCarrito = [];
-                });
 
 
         }
@@ -350,7 +364,7 @@
         return service;
 
         function getProductos(callback) {
-            return $http.get(url+'?function=getProductos', {cache:true})
+            return $http.get(url + '?function=getProductos', {cache: true})
                 .success(function (data) {
                     callback(data);
                 })
@@ -387,9 +401,9 @@
 
         }
 
-        function getProductoById(id, callback){
-            getProductos(function(data){
-                var response = data.filter(function(elem, index, array){
+        function getProductoById(id, callback) {
+            getProductos(function (data) {
+                var response = data.filter(function (elem, index, array) {
                     return elem.producto_id == id;
                     //if(elem.destacado == 1){
                     //    return elem;
@@ -398,11 +412,11 @@
 
                 callback(response);
             });
-       }
+        }
 
-        function getProductosByCategoria(id, callback){
-            getProductos(function(data){
-                var response = data.filter(function(elem, index, array){
+        function getProductosByCategoria(id, callback) {
+            getProductos(function (data) {
+                var response = data.filter(function (elem, index, array) {
 
                     return elem.categoria_id == id;
                     //if(elem.destacado == 1){
@@ -414,22 +428,22 @@
             });
         }
 
-        function getProductosDestacados(callback){
-            getProductos(function(data){
-                var response = data.filter(function(elem, index, array){
-                    if(elem.destacado == 1){
+        function getProductosDestacados(callback) {
+            getProductos(function (data) {
+                var response = data.filter(function (elem, index, array) {
+                    if (elem.destacado == 1) {
                         return elem;
                     }
                 });
 
-                callback(response.slice(0,8));
+                callback(response.slice(0, 8));
             });
 
 
         }
 
-        function getProductosMasVendidos(callback){
-            getProductos(function(data){
+        function getProductosMasVendidos(callback) {
+            getProductos(function (data) {
                 var response = data.sort(function (a, b) {
                     return b.vendidos - a.vendidos;
                     //if (a.name > b.name) {
@@ -442,7 +456,7 @@
                     //return 0;
                 });
 
-                callback(response.slice(0,8));
+                callback(response.slice(0, 8));
             });
         }
 
@@ -455,9 +469,9 @@
                 });
         }
 
-        function getOfertasById(id, callback){
-            getOfertas(function(data){
-                var response = data.filter(function(elem, index, array){
+        function getOfertasById(id, callback) {
+            getOfertas(function (data) {
+                var response = data.filter(function (elem, index, array) {
 
                     return elem.oferta_id == id;
                     //if(elem.destacado == 1){
@@ -478,9 +492,9 @@
                 });
         }
 
-        function getKitById(id, callback){
-            getKits(function(data){
-                var response = data.filter(function(elem, index, array){
+        function getKitById(id, callback) {
+            getKits(function (data) {
+                var response = data.filter(function (elem, index, array) {
 
                     return elem.kit_id == id;
                     //if(elem.destacado == 1){
