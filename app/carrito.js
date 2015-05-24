@@ -546,7 +546,7 @@
 
     AcAngularSucursalesService.$inject = ['$http'];
     function AcAngularSucursalesService($http){
-        var url = currentScriptPath.replace('carrito.js', 'productos.php');
+        var url = currentScriptPath.replace('carrito.js', 'carrito.php');
         var service = {};
         service.getSucursales = getSucursales;
 

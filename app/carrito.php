@@ -12,25 +12,29 @@ require_once 'MyDBi.php';
 $data = file_get_contents("php://input");
 
 $decoded = json_decode($data);
-
-if ($decoded->function == 'getProductos') {
-    getProductos();
-} elseif ($decoded->function == 'updateStock') {
-    updateStock($decoded->productos);
-} elseif ($decoded->function == 'addProducto') {
-    addProducto($decoded->carrito, $decoded->producto);
-} elseif ($decoded->function == 'removeProducto') {
-    removeProducto($decoded->carrito, $decoded->producto);
-}elseif ($decoded->function == 'confirmarCarrito') {
-    confirmarCarrito($decoded->carrito);
-}elseif ($decoded->function == 'nuevoCarrito') {
-    nuevoCarrito($decoded->userid);
-}elseif ($decoded->function == 'cancelarCarrito') {
-    cancelarCarrito($decoded->carrito);
-}elseif ($decoded->function == 'getCarrito') {
-    getCarrito($decoded->carrito);
-}elseif ($decoded->function == 'getSucursales') {
-    getSucursales();
+if($decoded != null) {
+    if ($decoded->function == 'getProductos') {
+        getProductos();
+    } elseif ($decoded->function == 'updateStock') {
+        updateStock($decoded->productos);
+    } elseif ($decoded->function == 'addProducto') {
+        addProducto($decoded->carrito, $decoded->producto);
+    } elseif ($decoded->function == 'removeProducto') {
+        removeProducto($decoded->carrito, $decoded->producto);
+    } elseif ($decoded->function == 'confirmarCarrito') {
+        confirmarCarrito($decoded->carrito);
+    } elseif ($decoded->function == 'nuevoCarrito') {
+        nuevoCarrito($decoded->userid);
+    } elseif ($decoded->function == 'cancelarCarrito') {
+        cancelarCarrito($decoded->carrito);
+    } elseif ($decoded->function == 'getCarrito') {
+        getCarrito($decoded->carrito);
+    }
+}else{
+    $function = $_GET["function"];
+    if ($function == 'getSucursales') {
+        getSucursales();
+    }
 }
 
 
