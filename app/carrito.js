@@ -107,7 +107,7 @@
                                 vm.carrito.total = (vm.carrito.total !== 0.0 && vm.productosCarrito.length > 0) ? vm.carrito.total : parseFloat(data[0].total);
                                 vm.carrito.fecha = '';
                                 $cookieStore.put('carritoCookie', vm.carrito);
-                                $broadcast('ActualizaCarrito');
+                                $scope.$broadcast('ActualizaCarrito');
                             }
                         );
                     } else {
@@ -121,7 +121,7 @@
                                 //vm.detalles = data[0].detalles;
                                 vm.carrito.fecha = '';
                                 $cookieStore.put('carritoCookie', vm.carrito);
-                                $broadcast('ActualizaCarrito');
+                                $scope.$broadcast('ActualizaCarrito');
                             });
                         //$cookies.put();
                     }
@@ -148,8 +148,8 @@
         this.productosCarrito = [];
     }
 
-    AcAngularCarritoServiceAcciones.$inject = ['$cookieStore', 'acAngularCarritoTotalService', 'acAngularCarritoService', '$broadcast'];
-    function AcAngularCarritoServiceAcciones($cookieStore, acAngularCarritoTotalService, acAngularCarritoService, $broadcast) {
+    AcAngularCarritoServiceAcciones.$inject = ['$cookieStore', 'acAngularCarritoTotalService', 'acAngularCarritoService'];
+    function AcAngularCarritoServiceAcciones($cookieStore, acAngularCarritoTotalService, acAngularCarritoService) {
         var vm = this;
         vm.productosMockUp = [];
         vm.productosCarrito = acAngularCarritoTotalService.productosCarrito;
@@ -199,7 +199,7 @@
                                         acAngularCarritoTotalService.carrito = {};
                                         acAngularCarritoTotalService.productosCarrito = [];
                                         callback(data);
-                                        $broadcast('ActualizaCarrito');
+                                        $scope.$broadcast('ActualizaCarrito');
                                     });
 
 
@@ -234,7 +234,7 @@
                                         acAngularCarritoTotalService.carrito = {};
                                         acAngularCarritoTotalService.productosCarrito = [];
                                         callback(data);
-                                        $broadcast('ActualizaCarrito');
+                                        $scope.$broadcast('ActualizaCarrito');
                                     });
 
 
