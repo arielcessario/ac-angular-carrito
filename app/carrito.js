@@ -148,8 +148,8 @@
         this.productosCarrito = [];
     }
 
-    AcAngularCarritoServiceAcciones.$inject = ['$cookieStore', 'acAngularCarritoTotalService', 'acAngularCarritoService'];
-    function AcAngularCarritoServiceAcciones($cookieStore, acAngularCarritoTotalService, acAngularCarritoService) {
+    AcAngularCarritoServiceAcciones.$inject = ['$cookieStore', 'acAngularCarritoTotalService', 'acAngularCarritoService', '$scope'];
+    function AcAngularCarritoServiceAcciones($cookieStore, acAngularCarritoTotalService, acAngularCarritoService, $scope) {
         var vm = this;
         vm.productosMockUp = [];
         vm.productosCarrito = acAngularCarritoTotalService.productosCarrito;
