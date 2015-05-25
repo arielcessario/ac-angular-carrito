@@ -17,7 +17,7 @@
     <div ng-repeat="producto in carritoCtrl.productosCarrito" class="ac-carrito-producto"><span id="ac-carrito-descr">{{producto.nombre}}</span>
         <input id="ac-carrito-prod-input" ng-change="(producto.cantidad<0)?producto.cantidad=0:producto.cantidad; carritoCtrl.calcularTotal();"
                type="number" ng-model="producto.cantidad"/><button id="ac-carrito-remover" ng-click="carritoCtrl.removerProducto($index);">
-            <img src="../../img/cruz.png" alt=""/>
+            <!--<img src="../../img/cruz.png" alt=""/>-->
         </button></div>
 </div>
 <div id="ac-carrito-total">
