@@ -30,6 +30,7 @@
                 var vm = this;
                 vm.productosMockUp = [];
                 vm.productosCarrito = acAngularCarritoTotalService.productosCarrito;
+                vm.totalProductosEnCarrito = acAngularCarritoTotalService.totalProductos;
                 //$scope.productosCarrito = acAngularCarritoTotalService.productosCarrito;
                 //
                 //$scope.$watch('productosCarrito', function(newValue, oldValue){
@@ -41,6 +42,7 @@
                 $scope.$on('ActualizaCarrito', function() {
                     vm.productosCarrito = acAngularCarritoTotalService.productosCarrito;
                     vm.carrito = acAngularCarritoTotalService.carrito;
+                    vm.totalProductosEnCarrito = acAngularCarritoTotalService.totalProductos;
                 });
 
 
@@ -146,6 +148,7 @@
     function AcAngularCarritoTotalService() {
         this.carrito = {};
         this.productosCarrito = [];
+        this.totalProductos = 0;
     }
 
     AcAngularCarritoServiceAcciones.$inject = ['$cookieStore', 'acAngularCarritoTotalService', 'acAngularCarritoService', '$rootScope'];
@@ -269,6 +272,8 @@
             for (var i = 0; i < acAngularCarritoTotalService.productosCarrito.length; i++) {
                 acAngularCarritoTotalService.carrito.total = parseFloat(acAngularCarritoTotalService.carrito.total) +
                 (parseFloat(acAngularCarritoTotalService.productosCarrito[i].precios[0].precio) * acAngularCarritoTotalService.productosCarrito[i].cantidad);
+
+                acAngularCarritoService.totalProductos = acAngularCarritoService.totalProductos.productosCarrito[i].cantidad;
             }
 
 
