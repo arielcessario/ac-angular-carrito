@@ -273,7 +273,7 @@
                 acAngularCarritoTotalService.carrito.total = parseFloat(acAngularCarritoTotalService.carrito.total) +
                 (parseFloat(acAngularCarritoTotalService.productosCarrito[i].precios[0].precio) * acAngularCarritoTotalService.productosCarrito[i].cantidad);
 
-                acAngularCarritoService.totalProductos = acAngularCarritoService.totalProductos.productosCarrito[i].cantidad;
+                acAngularCarritoTotalService.totalProductos = acAngularCarritoTotalService.totalProductos + acAngularCarritoTotalService.productosCarrito[i].cantidad;
             }
 
 
