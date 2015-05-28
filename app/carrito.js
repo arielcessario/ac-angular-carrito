@@ -269,6 +269,8 @@
 
         function calcularTotal() {
             acAngularCarritoTotalService.carrito.total = 0.0;
+            acAngularCarritoTotalService.totalProductos = 0;
+
             for (var i = 0; i < acAngularCarritoTotalService.productosCarrito.length; i++) {
                 acAngularCarritoTotalService.carrito.total = parseFloat(acAngularCarritoTotalService.carrito.total) +
                 (parseFloat(acAngularCarritoTotalService.productosCarrito[i].precios[0].precio) * acAngularCarritoTotalService.productosCarrito[i].cantidad);
@@ -276,6 +278,7 @@
                 acAngularCarritoTotalService.totalProductos = acAngularCarritoTotalService.totalProductos + acAngularCarritoTotalService.productosCarrito[i].cantidad;
             }
 
+            $rootScope.$broadcast('ActualizaCarrito');
 
         }
 
