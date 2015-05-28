@@ -1,5 +1,5 @@
 <div ng-if="snipet" id="ac-angular-carrito-snipet">
- <span>{{carritoCtrl.carrito.total | currency}}  ({{carritoCtrl.totalProductosEnCarrito}})</span>
+ <span ng-class="{'ac-snipet-total-modified':carritoCtrl.modified}">{{carritoCtrl.carrito.total | currency}}  ({{carritoCtrl.totalProductosEnCarrito}})</span>
     <!--<div>-->
         <!--<button  ng-click="carritoCtrl.comprar()">Comprar</button>-->
     <!--</div>-->

@@ -16,21 +16,23 @@
 
 
     AcAngularCarrito.$inject = ['$location', '$route', '$cookieStore', 'acAngularCarritoService', 'acAngularCarritoServiceAcciones', 'acAngularCarritoTotalService',
-        'acAngularProductosService'];
+        'acAngularProductosService', '$timeout'];
     function AcAngularCarrito($location, $route, $cookieStore, acAngularCarritoService, acAngularCarritoServiceAcciones, acAngularCarritoTotalService,
-                              acAngularProductosService) {
+                              acAngularProductosService, $timeout) {
         return {
             restrict: 'E',
             scope: {
                 snipet: '='
             },
             templateUrl: currentScriptPath.replace('.js', '.html'),
-            controller: function ($scope, $compile, $http, $cookieStore) {
+            controller: function ($scope, $compile, $http, $cookieStore, $timeout) {
 
                 var vm = this;
                 vm.productosMockUp = [];
                 vm.productosCarrito = acAngularCarritoTotalService.productosCarrito;
                 vm.totalProductosEnCarrito = acAngularCarritoTotalService.totalProductos;
+                vm.modified = false;
+
                 //$scope.productosCarrito = acAngularCarritoTotalService.productosCarrito;
                 //
                 //$scope.$watch('productosCarrito', function(newValue, oldValue){
@@ -43,6 +45,10 @@
                     vm.productosCarrito = acAngularCarritoTotalService.productosCarrito;
                     vm.carrito = acAngularCarritoTotalService.carrito;
                     vm.totalProductosEnCarrito = acAngularCarritoTotalService.totalProductos;
+                    vm.modified = true;
+                    $timeout(function(){
+                        vm.modified = false;
+                    }, 1000);
                 });
 
 
