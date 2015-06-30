@@ -102,6 +102,7 @@ function addProducto($carrito, $producto){
     $data =[
         'carrito_id' => $carrito,
         'producto_id' => $decoded->producto_id,
+        'oferta_id' => $decoded->oferta_id,
         'cantidad' => $decoded->cantidad,
         'precio' => $decoded->precios[0]->precio
     ];

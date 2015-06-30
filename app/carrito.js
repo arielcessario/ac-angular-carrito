@@ -260,7 +260,15 @@
             var producto_cantidad = producto;
             var encontrado = false;
             for (var i = 0; i < acAngularCarritoTotalService.productosCarrito.length; i++) {
-                if (acAngularCarritoTotalService.productosCarrito[i].producto_id == producto.producto_id) {
+                if (acAngularCarritoTotalService.productosCarrito[i].producto_id == producto.producto_id
+                    && producto.producto_id !== -1) {
+                    encontrado = true;
+                    acAngularCarritoTotalService.productosCarrito[i].cantidad = acAngularCarritoTotalService.productosCarrito[i].cantidad + 1;
+                }
+
+                //Busco por oferta
+                if (acAngularCarritoTotalService.productosCarrito[i].oferta_id == producto.oferta_id
+                    && producto.producto_id == -1) {
                     encontrado = true;
                     acAngularCarritoTotalService.productosCarrito[i].cantidad = acAngularCarritoTotalService.productosCarrito[i].cantidad + 1;
                 }
@@ -269,6 +277,8 @@
                 producto_cantidad.cantidad = 1;
                 acAngularCarritoTotalService.productosCarrito.push(producto_cantidad);
             }
+
+            //console.log(acAngularCarritoTotalService.productosCarrito);
             calcularTotal();
 
         }
