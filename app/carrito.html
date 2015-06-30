@@ -1,32 +1,32 @@
 <div ng-if="snipet" id="ac-angular-carrito-snipet">
- <span ng-class="{'ac-snipet-total-modified':carritoCtrl.modified}">{{carritoCtrl.carrito.total | currency}}  ({{carritoCtrl.totalProductosEnCarrito}})</span>
+    <span ng-class="{'ac-snipet-total-modified':carritoCtrl.modified}">{{carritoCtrl.carrito.total | currency}}  ({{carritoCtrl.totalProductosEnCarrito}})</span>
     <!--<div>-->
-        <!--<button  ng-click="carritoCtrl.comprar()">Comprar</button>-->
+    <!--<button  ng-click="carritoCtrl.comprar()">Comprar</button>-->
     <!--</div>-->
 </div>
 
 <div id="ac-angular-carrito-form" ng-if="!snipet"><!--Esto solo es a para tener una lista de productos disponible, hay que sacarlo en producción-->
-<!--el botón de comprar debe invocar a un servicio y le pasa el producto completo-->
-<!--<div ng-repeat="producto in carritoCtrl.productosMockUp">-->
+    <!--el botón de comprar debe invocar a un servicio y le pasa el producto completo-->
+    <!--<div ng-repeat="producto in carritoCtrl.productosMockUp">-->
     <!--<div >{{producto.producto_id}} {{producto.precios[0].precio}} <button ng-click="carritoCtrl.addProducto(producto)">comprar</button> </div>-->
-<!--</div>-->
+    <!--</div>-->
 
-<!--<div ng-click="carritoCtrl.remover()">remover</div>-->
+    <!--<div ng-click="carritoCtrl.remover()">remover</div>-->
 
-<div id="ac-carrito-productos-container">
-    <div ng-repeat="producto in carritoCtrl.productosCarrito" class="ac-carrito-producto"><span id="ac-carrito-descr">{{producto.nombre}}</span>
-        <span>{{producto}}</span>
-        <span>{{producto.precios[0].precio | currency}}</span>
-        <input id="ac-carrito-prod-input" ng-change="(producto.cantidad<0)?producto.cantidad=0:producto.cantidad; carritoCtrl.calcularTotal();"
-               type="number" ng-model="producto.cantidad"/><button id="ac-carrito-remover" ng-click="carritoCtrl.removerProducto($index);">
+    <div id="ac-carrito-productos-container">
+        <div ng-repeat="producto in carritoCtrl.productosCarrito" class="ac-carrito-producto">
+            <span id="ac-carrito-descr">{{producto.nombre}}</span>
+            <span id="ac-carrito-precio-uni">{{producto.precios[0].precio | currency}}</span>
+            <input id="ac-carrito-prod-input" ng-change="(producto.cantidad<0)?producto.cantidad=0:producto.cantidad; carritoCtrl.calcularTotal();"
+                   type="number" ng-model="producto.cantidad"/><button id="ac-carrito-remover" ng-click="carritoCtrl.removerProducto($index);">
             <!--<img src="../../img/cruz.png" alt=""/>-->
         </button></div>
-</div>
-<div id="ac-carrito-total">
-    {{carritoCtrl.carrito.total | currency}}
+    </div>
+    <div id="ac-carrito-total">
+        {{carritoCtrl.carrito.total | currency}}
 
-</div>
+    </div>
     <!--<div>-->
-        <!--<button ng-click="carritoCtrl.comprar()">Comprar</button>-->
+    <!--<button ng-click="carritoCtrl.comprar()">Comprar</button>-->
     <!--</div>-->
 </div>
