@@ -66,7 +66,7 @@ function getProductos()
             0 fotos,
             0 precios,
             0 proveedores
-        FROM Bayres.productos;");
+        FROM productos;");
 
     foreach ($results as $row) {
 

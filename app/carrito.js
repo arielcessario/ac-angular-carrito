@@ -181,6 +181,10 @@
                 return false;
             }
 
+            if(acAngularCarritoTotalService.productosCarrito.length < 1){
+                return false;
+            }
+
 
             var carritoCookie = $cookieStore.get('carritoCookie');
             if (carritoCookie === undefined ||
