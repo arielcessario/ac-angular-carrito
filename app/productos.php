@@ -26,8 +26,6 @@ if($decoded != null) {
     $function = $_GET["function"];
     if ($function == 'getProductos') {
         getProductos();
-    }elseif ($function == 'getCategorias') {
-        getCategorias();
     }
 }
 
@@ -92,20 +90,6 @@ function getOfertas()
 }
 
 
-function getCategorias()
-{
-    $db = new MysqliDb();
-    $results = $db->rawQuery('select categoria_id, nombre, parent_id, 0 subcategorias from categorias');
-    $categorias = array();
-
-    foreach($results as $row){
-        $db->where('parent_id', $row["parent_id"]);
-        $result_categoria = $db->get('categorias');
-        $row["subcategorias"] = $result_categoria;
-        array_push($categorias, $row);
-    }
-    echo json_encode($categorias);
-}
 
 
 
