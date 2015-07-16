@@ -43,11 +43,11 @@ if($decoded != null) {
 function getCategorias()
 {
     $db = new MysqliDb();
-    $results = $db->rawQuery('select categoria_id, nombre, parent_id, 0 subcategorias from categorias');
+    $results = $db->rawQuery('select categoria_id, nombre, parent_id, 0 subcategorias from categorias where parent_id=-1');
     $categorias = array();
 
     foreach($results as $row){
-        $db->where('parent_id', $row["parent_id"]);
+        $db->where('parent_id', $row["categoria_id"]);
         $result_categoria = $db->get('categorias');
         $row["subcategorias"] = $result_categoria;
         array_push($categorias, $row);
