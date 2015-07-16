@@ -10,6 +10,7 @@
         .factory('acAngularCarritoService', AcAngularCarritoService)
         .factory('acAngularProductosService', AcAngularProductosService)
         .factory('acAngularSucursalesService', AcAngularSucursalesService)
+        .factory('acAngularCategoriasService', AcAngularCategoriasService)
         .factory('acAngularCarritoServiceAcciones', AcAngularCarritoServiceAcciones)
         .service('acAngularCarritoTotalService', AcAngularCarritoTotalService)
     ;
@@ -611,6 +612,24 @@
 
         function getSucursales(callback) {
             return $http.get(url + '?function=getSucursales', {cache: true})
+                .success(function (data) {
+                    callback(data);
+                })
+                .error(function (data) {
+                });
+
+        }
+    }
+    AcAngularCategoriasService.$inject = ['$http'];
+    function AcAngularCategoriasService($http) {
+        var url = currentScriptPath.replace('carrito.js', 'carrito.php');
+        var service = {};
+        service.getCategorias = getCategorias;
+
+        return service;
+
+        function getCategorias(callback) {
+            return $http.get(url + '?function=getCategorias', {cache: true})
                 .success(function (data) {
                     callback(data);
                 })
