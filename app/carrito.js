@@ -201,6 +201,10 @@
                         acAngularCarritoTotalService.carrito.detalles = acAngularCarritoTotalService.productosCarrito;
 
 
+                        if(acAngularCarritoTotalService.carrito.carrito_id == undefined){
+                            acAngularCarritoTotalService.carrito.carrito_id = vm.carrito.carrito_id;
+                        }
+
                         acAngularCarritoService.confirmarCarrito(acAngularCarritoTotalService.carrito,
                             function (data) {
                                 //console.log(data);
