@@ -207,7 +207,7 @@
 
                         acAngularCarritoService.confirmarCarrito(acAngularCarritoTotalService.carrito,
                             function (data) {
-                                //console.log(data);
+                                console.log(acAngularCarritoTotalService.carrito);
 
                                 acAngularCarritoService.enviarDetalleCarrito(loggedCookie.cliente[0],
                                     acAngularCarritoTotalService.carrito,sucursal, function (data) {
@@ -220,9 +220,15 @@
                                         $rootScope.$broadcast('ActualizaCarrito');
                                     });
 
-
+                                //Envio el detalle de la compra al vendedor
+                                acAngularCarritoService.enviarDetalleDePedido(
+                                    loggedCookie.cliente[0],
+                                    acAngularCarritoTotalService.carrito,
+                                    sucursal,
+                                    function (data2) {
+                                        console.log(data2);
+                                    });
                             });
-
                     }
                 );
             } else {
@@ -242,12 +248,10 @@
                         acAngularCarritoService.confirmarCarrito(acAngularCarritoTotalService.carrito,
                             function (data) {
                                 //console.log(data);
-
+                                console.log(acAngularCarritoTotalService.carrito);
 
                                 acAngularCarritoService.enviarDetalleCarrito(loggedCookie.cliente[0],
                                     acAngularCarritoTotalService.carrito, sucursal, function (data) {
-                                        //console.log(data);
-                                        //console.log(acAngularCarritoTotalService.carrito);
                                         $cookieStore.remove('carritoCookie');
                                         acAngularCarritoTotalService.carrito = {};
                                         acAngularCarritoTotalService.productosCarrito = [];
@@ -255,6 +259,14 @@
                                         $rootScope.$broadcast('ActualizaCarrito');
                                     });
 
+                                //Envio el detalle de la compra al vendedor
+                                acAngularCarritoService.enviarDetalleDePedido(
+                                    loggedCookie.cliente[0],
+                                    acAngularCarritoTotalService.carrito,
+                                    sucursal,
+                                    function (data2) {
+                                        console.log(data2);
+                                    });
 
                             });
 
@@ -319,6 +331,8 @@
 
         var url = currentScriptPath.replace('.js', '.php');
         var url_enviar = currentScriptPath.replace('carrito.js', 'contact.php');
+        var url_enviar_2 = currentScriptPath.replace('carrito.js', 'contact2.php');
+
         var service = {};
         //service.addProducto = addProducto;
         service.removeProducto = removeProducto;
@@ -328,6 +342,7 @@
         service.getCarrito = getCarrito;
         service.updateStock = updateStock;
         service.enviarDetalleCarrito = enviarDetalleCarrito;
+        service.enviarDetalleDePedido = enviarDetalleDePedido;
 
         return service;
 
@@ -392,6 +407,21 @@
                     //vm.nombre = '';
                     //vm.mensaje = '';
                     //vm.asunto = '';
+                })
+                .error(function (data) {
+                    console.log(data);
+                });
+        }
+
+        function enviarDetalleDePedido(cliente, carrito, sucursal, callback) {
+            return $http.post(url_enviar_2,
+                {
+                    'email': cliente.mail, 'nombre': cliente.nombre + ' ' + cliente.apellido,
+                    'mensaje': JSON.stringify(carrito), 'asunto': 'Detalle de Compra - Carrito ' + carrito.carrito_id,
+                    'sucursal': sucursal
+                })
+                .success(function (data) {
+                    callback(data);
                 })
                 .error(function (data) {
                     console.log(data);
