@@ -216,6 +216,7 @@
                                         $cookieStore.remove('carritoCookie');
                                         acAngularCarritoTotalService.carrito = {};
                                         acAngularCarritoTotalService.productosCarrito = [];
+                                        acAngularCarritoTotalService.totalProductos = 0;
                                         callback(data);
                                         $rootScope.$broadcast('ActualizaCarrito');
                                     });
@@ -255,6 +256,7 @@
                                         $cookieStore.remove('carritoCookie');
                                         acAngularCarritoTotalService.carrito = {};
                                         acAngularCarritoTotalService.productosCarrito = [];
+                                        acAngularCarritoTotalService.totalProductos = 0;
                                         callback(data);
                                         $rootScope.$broadcast('ActualizaCarrito');
                                     });
