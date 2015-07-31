@@ -43,7 +43,7 @@ function sendMail($email, $nombre, $mensaje, $asunto, $sucursal, $direccion)
     $message .= '</table>';
     $message .= '</div></body></html>';
 
-    $to = 'mmaneff@gmail.com';
+    $to = 'arielcessario@gmail.com';
 
     $subject = 'Detalle de Compra - Cliente ' . $nombre;
     $headers =  'From: ' .$email . "\r\n".

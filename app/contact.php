@@ -50,8 +50,8 @@ function sendMail($email, $nombre, $mensaje, $asunto, $sucursal, $direccion)
     $message .= '</table>';
     $message .= '</div></body></html>';
 
-    //$to = $email;
-    $to = 'Mateo <mmaneff@gmail.com>, Pela <arielcessario@gmail.com>, Magu <juan.dilello@gmail.com>, Diego <diegoyankelevich@gmail.com>';
+    $to = $email;
+//    $to = 'Mateo <mmaneff@gmail.com>, Pela <arielcessario@gmail.com>, Magu <juan.dilello@gmail.com>, Diego <diegoyankelevich@gmail.com>';
 
     $subject = 'Detalle de su compra';
 
