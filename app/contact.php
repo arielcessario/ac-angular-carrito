@@ -46,7 +46,7 @@ function sendMail($email, $nombre, $mensaje, $asunto, $sucursal, $direccion)
     $message .= '<div style="font-size:16px; margin-left:10px;">'. $nombre .'</div>';
     $message .= '<div style="font-size:16px; margin-left:10px;">'. $direccion .'</div>';
     $message .= '<div style="font-size:16px; margin:0 0 10px 10px;">'. $sucursal .'</div>';
-    $message .= '</div></div></div>';
+    $message .= '</div><div style="text-align:center;font-weight: bold;margin-top: 15px;">Gracias por su compra</div></div></div>';
     $message .= '</table>';
     $message .= '</div></body></html>';
 
