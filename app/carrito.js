@@ -656,8 +656,8 @@
 
         }
     }
-    AcAngularCategoriasService.$inject = ['$http'];
-    function AcAngularCategoriasService($http) {
+    AcAngularCategoriasService.$inject = ['$http', 'acAngularProductosService'];
+    function AcAngularCategoriasService($http, acAngularProductosService) {
         var url = currentScriptPath.replace('carrito.js', 'carrito.php');
         var service = {};
         service.getCategorias = getCategorias;
@@ -667,10 +667,40 @@
         function getCategorias(callback) {
             return $http.get(url + '?function=getCategorias', {cache: true})
                 .success(function (data) {
-                    callback(data);
+                    acAngularProductosService.getProductos(function (productos) {
+
+                        for (var i = 0; i < data.length; i++) {
+                            getCategoriesItemsCount(data[i], productos);
+                            for (var x = 0; x < data[i].subcategorias.length; x++) {
+                                getCategoriesItemsCount(data[i].subcategorias[x], productos);
+                            }
+                        }
+
+
+                        //console.log(data);
+                        callback(data);
+                    });
+
                 })
                 .error(function (data) {
                 });
+
+        }
+
+
+        function getCategoriesItemsCount(categoria, productos) {
+            var total_categoria = 0;
+            for (var i = 0; i < productos.length; i++) {
+                if (categoria.categoria_id == productos[i].categoria_id) {
+                    total_categoria = total_categoria + 1;
+                    //console.log(productos[i].producto_id + '-' + categoria.categoria_id);
+                }
+            }
+            //console.log(total_categoria);
+
+            return categoria.total_categoria = total_categoria;
+
+            //callback(categoria);
 
         }
     }
