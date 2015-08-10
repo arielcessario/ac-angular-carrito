@@ -173,6 +173,26 @@
 
         return service;
 
+        /**
+         * Retorna la fecha actual del sistema en el formato dd/mm/aaaa
+         * @returns {string}
+         */
+        function getCurrentDate() {
+            var today = new Date();
+            var dd = today.getDate();
+            var mm = today.getMonth()+1; //January is 0!
+
+            var yyyy = today.getFullYear();
+            if(dd<10){
+                dd='0'+dd
+            }
+            if(mm<10){
+                mm='0'+mm
+            }
+            var today = dd + '/' + mm + '/' + yyyy;
+            return today;
+        }
+
         function comprar(sucursal, callback) {
 
             var loggedCookie = $cookieStore.get('app.userlogged');
@@ -195,7 +215,7 @@
                         vm.carrito.carrito_id = data.results;
                         vm.carrito.status = 1;
                         vm.carrito.total = (vm.carrito.total !== 0.0 && acAngularCarritoTotalService.productosCarrito.length > 0) ? vm.carrito.total : parseFloat(data[0].total);;
-                        vm.carrito.fecha = '';
+                        vm.carrito.fecha = getCurrentDate();
                         $cookieStore.put('carritoCookie', vm.carrito);
 
                         acAngularCarritoTotalService.carrito.detalles = acAngularCarritoTotalService.productosCarrito;
@@ -239,7 +259,7 @@
                         vm.carrito.status = data[0].status;
                         vm.carrito.total = (vm.carrito.total !== 0.0 && acAngularCarritoTotalService.productosCarrito.length > 0) ? vm.carrito.total : parseFloat(data[0].total);
                         //vm.detalles = data[0].detalles;
-                        vm.carrito.fecha = '';
+                        vm.carrito.fecha = getCurrentDate();
                         $cookieStore.put('carritoCookie', vm.carrito);
 
 
