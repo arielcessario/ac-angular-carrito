@@ -92,8 +92,13 @@
                 }
 
                 function removerProducto(index) {
-                    acAngularCarritoServiceAcciones.removerProducto(index);
-
+                    //acAngularCarritoServiceAcciones.removerProducto(index);
+                    var borrarOk = confirm('¿Desea borrar el producto seleccionado?');
+                    if(borrarOk){
+                        acAngularCarritoServiceAcciones.removerProducto(index);
+                    } else {
+                        return;
+                    }
                 }
 
                 function ceckCarritoCookie() {
