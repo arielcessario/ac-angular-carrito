@@ -45,7 +45,7 @@ function sendMail($email, $nombre, $mensaje, $asunto, $sucursal, $direccion)
 
     $to = 'arielcessario@gmail.com';
 
-    $subject = 'Detalle de Compra - Cliente ' . $nombre;
+    $subject = 'Detalle de Compra Nro ' . $productos->carrito_id . ' - Cliente ' . $nombre;
     $headers =  'From: ' .$email . "\r\n".
                 'Reply-To: arielcessario@gmail.com' . "\r\n";
 

@@ -91,9 +91,10 @@
 
                 }
 
-                function removerProducto(index, producto) {
-                    var detalle = producto.nombre + ' $' + producto.precios[0].precio + '(x' + producto.cantidad + ')';
-                    var borrarOk = confirm('¿Desea borrar el producto '+ detalle +'?');
+                function removerProducto(index) {
+                    //var detalle = producto.nombre + ' $' + producto.precios[0].precio + '(x' + producto.cantidad + ')';
+                    //var borrarOk = confirm('¿Desea borrar el producto '+ detalle +'?');
+                    var borrarOk = confirm('¿Desea borrar el producto?');
                     if(borrarOk){
                         acAngularCarritoServiceAcciones.removerProducto(index);
                     } else {
