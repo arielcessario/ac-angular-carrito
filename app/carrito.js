@@ -121,7 +121,7 @@
                                 vm.carrito.carrito_id = data.results;
                                 vm.carrito.status = 1;
                                 vm.carrito.total = (vm.carrito.total !== 0.0 && vm.productosCarrito.length > 0) ? vm.carrito.total : parseFloat(data[0].total);
-                                vm.carrito.fecha = '';
+                                vm.carrito.fecha = acAngularCarritoServiceAcciones.getCurrentDate();
                                 $cookieStore.put('carritoCookie', vm.carrito);
                                 $scope.$broadcast('ActualizaCarrito');
                             }
@@ -135,7 +135,7 @@
                                 vm.carrito.status = data[0].status;
                                 vm.carrito.total = (vm.carrito.total !== 0.0 && vm.productosCarrito.length > 0) ? vm.carrito.total : parseFloat(data[0].total);
                                 //vm.detalles = data[0].detalles;
-                                vm.carrito.fecha = '';
+                                vm.carrito.fecha = acAngularCarritoServiceAcciones.getCurrentDate();
                                 $cookieStore.put('carritoCookie', vm.carrito);
                                 $scope.$broadcast('ActualizaCarrito');
                             });
@@ -177,6 +177,7 @@
         service.calcularTotal = calcularTotal;
         service.removerProducto = removerProducto;
         service.comprar = comprar;
+        service.getCurrentDate = getCurrentDate;
 
         return service;
 
