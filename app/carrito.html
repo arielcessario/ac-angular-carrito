@@ -18,13 +18,14 @@
             <span id="ac-carrito-descr">{{producto.nombre}}</span>
             <span id="ac-carrito-precio-uni">{{producto.precios[0].precio | currency}}</span>
             <input id="ac-carrito-prod-input" ng-change="(producto.cantidad<0)?producto.cantidad=0:producto.cantidad; carritoCtrl.calcularTotal();"
-                   type="number" ng-model="producto.cantidad"/><button id="ac-carrito-remover" ng-click="carritoCtrl.removerProducto($index);">
+                   type="number" ng-model="producto.cantidad"/>
+            <img src="img/lupa.png" ng-mouseover="carritoCtrl.calcularSubTotal(producto)" alt="SubTotal: {{carritoCtrl.subTotal}}" title="SubTotal: {{carritoCtrl.subTotal}}" width="34" height="34" style="cursor: pointer"/>
+            <button id="ac-carrito-remover" ng-click="carritoCtrl.removerProducto($index);"></button>
             <!--<img src="../../img/cruz.png" alt=""/>-->
-        </button></div>
+        </div>
     </div>
     <div id="ac-carrito-total">
         {{carritoCtrl.carrito.total | currency}}
-
     </div>
     <!--<div>-->
     <!--<button ng-click="carritoCtrl.comprar()">Comprar</button>-->

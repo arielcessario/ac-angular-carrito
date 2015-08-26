@@ -59,6 +59,8 @@
                 vm.removerProducto = removerProducto;
                 vm.calcularTotal = calcularTotal;
                 vm.comprar = comprar;
+                vm.calcularSubTotal = calcularSubTotal;
+                vm.subTotal = 0;
 
                 ceckCarritoCookie();
 
@@ -112,7 +114,6 @@
                         return false;
                     }
 
-
                     var carritoCookie = $cookieStore.get('carritoCookie');
                     if (carritoCookie === undefined ||
                         carritoCookie.carrito_id === undefined) {
@@ -129,8 +130,6 @@
                     } else {
                         acAngularCarritoService.getCarrito(carritoCookie.carrito_id,
                             function (data) {
-
-
                                 vm.carrito.carrito_id = data[0].carrito_id;
                                 vm.carrito.status = data[0].status;
                                 vm.carrito.total = (vm.carrito.total !== 0.0 && vm.productosCarrito.length > 0) ? vm.carrito.total : parseFloat(data[0].total);
@@ -141,11 +140,14 @@
                             });
                         //$cookies.put();
                     }
-
                 }
 
                 function calcularTotal() {
                     acAngularCarritoServiceAcciones.calcularTotal();
+                }
+
+                function calcularSubTotal(producto) {
+                    vm.subTotal = ' $' + (producto.precios[0].precio * producto.cantidad);
                 }
 
                 //vm.remover = function(){
