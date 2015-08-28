@@ -202,15 +202,10 @@ function cancelarCarrito($carrito){
     ];
 
     $db->where('carrito_id', $carrito->carrito_id);
-    $results = $db->update('carritos', $data);
-    $res = array('status' => 1, 'results' => []);
-    if($results){
-        $res->results = 1;
-        echo $res;
-
+    if($db->update('carritos', $data)){
+        echo json_encode(['status' => 1, 'results' => $carrito]);
     } else {
-        $res->status = 0;
-        echo $res;
+        echo json_encode(['status' => 0, 'results' => []]);
     }
 }
 function getCarrito($carrito){

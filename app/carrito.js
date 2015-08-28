@@ -180,6 +180,7 @@
         service.removerProducto = removerProducto;
         service.comprar = comprar;
         service.getCurrentDate = getCurrentDate;
+        service.cancelarCarrito = cancelarCarrito;
 
         return service;
 
@@ -354,7 +355,14 @@
         function removerProducto(index) {
             acAngularCarritoTotalService.productosCarrito.splice(index, 1);
             calcularTotal();
+        }
 
+        function cancelarCarrito(carrito, callback) {
+            //console.log(carrito);
+            acAngularCarritoService.cancelarCarrito(carrito, function(data){
+                //console.log(data);
+                callback(data);
+            });
         }
     }
 
