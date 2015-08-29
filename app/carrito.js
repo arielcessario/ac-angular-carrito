@@ -181,6 +181,7 @@
         service.comprar = comprar;
         service.getCurrentDate = getCurrentDate;
         service.cancelarCarrito = cancelarCarrito;
+        service.sendMailCancelarCarrito = sendMailCancelarCarrito;
 
         return service;
 
@@ -364,6 +365,21 @@
                 callback(data);
             });
         }
+
+        function sendMailCancelarCarrito(carrito, callback) {
+            //console.log(carrito);
+            var mensaje = "El Cliente XXXX solicito cancelar el pedido " +  carrito.carrito_id + "\n\n" +
+                "Fecha del Pedido \n\n" + carrito.fecha +
+                "Total del Pedido \n\n" + carrito.total +
+                "Saludos \n\n" +
+                "Bayres No Problem";
+
+            console.log(mensaje);
+            acAngularCarritoService.sendMailCancelarCarrito(mensaje, carrito, function(data){
+                console.log(data);
+                callback(data);
+            });
+        }
     }
 
     AcAngularCarritoService.$inject = ['$http'];
@@ -372,6 +388,7 @@
         var url = currentScriptPath.replace('.js', '.php');
         var url_enviar = currentScriptPath.replace('carrito.js', 'contact.php');
         var url_enviar_2 = currentScriptPath.replace('carrito.js', 'contact2.php');
+        var url_mail = currentScriptPath.replace('carrito.js', 'SendMail.php');
 
         var service = {};
         //service.addProducto = addProducto;
@@ -383,6 +400,7 @@
         service.updateStock = updateStock;
         service.enviarDetalleCarrito = enviarDetalleCarrito;
         service.enviarDetalleDePedido = enviarDetalleDePedido;
+        service.sendMailCancelarCarrito = sendMailCancelarCarrito;
 
         return service;
 
@@ -506,6 +524,22 @@
                 .success(function (data) {
                 })
                 .error(function (data) {
+                });
+        }
+
+        function sendMailCancelarCarrito(mensaje, carrito, callback) {
+            return $http.post(url_mail,
+                {
+                    function: 'sendMail',
+                    'mensaje': mensaje,
+                    'carrito_id': carrito.carrito_id
+                })
+                .success(function (data) {
+                    console.log(data);
+                    callback(data);
+                })
+                .error(function (data) {
+                    callback(data);
                 });
         }
     }
