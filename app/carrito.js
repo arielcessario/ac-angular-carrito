@@ -369,8 +369,8 @@
         function sendMailCancelarCarrito(carrito, callback) {
             //console.log(carrito);
             var mensaje = "El Cliente XXXX solicito cancelar el pedido " +  carrito.carrito_id + "\n\n" +
-                "Fecha del Pedido \n\n" + carrito.fecha +
-                "Total del Pedido \n\n" + carrito.total +
+                "Fecha del Pedido: " + carrito.fecha + "\n\n" +
+                "Total del Pedido: " + carrito.total + "\n\n" +
                 "Saludos \n\n" +
                 "Bayres No Problem";
 
