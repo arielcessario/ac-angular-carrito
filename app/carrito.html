@@ -21,7 +21,7 @@
                    type="number" ng-model="producto.cantidad"/>
             <img src="img/lupa.png" ng-mouseover="carritoCtrl.calcularSubTotal(producto)"
                  ng-click="carritoCtrl.calcularSubTotal(producto)"
-                 alt="SubTotal: {{carritoCtrl.subTotal}}" title="SubTotal: {{carritoCtrl.subTotal}}" width="34" height="34" style="cursor: pointer"/>
+                 alt="SubTotal: {{carritoCtrl.subTotal}}" title="SubTotal: {{carritoCtrl.subTotal}}" class="lupa"/>
             <button id="ac-carrito-remover" ng-click="carritoCtrl.removerProducto($index);"></button>
             <!--<img src="../../img/cruz.png" alt=""/>-->
         </div>
