@@ -366,16 +366,10 @@
             });
         }
 
-        function sendMailCancelarCarrito(carrito, callback) {
-            //console.log(carrito);
-            var mensaje = "El Cliente XXXX solicito cancelar el pedido " +  carrito.carrito_id + "\n\n" +
-                "Fecha del Pedido: " + carrito.fecha + "\n\n" +
-                "Total del Pedido: $" + carrito.total + "\n\n" +
-                "Saludos \n\n" +
-                "Bayres No Problem";
-
+        function sendMailCancelarCarrito(destinatario, mensaje, callback) {
+            console.log(destinatario);
             console.log(mensaje);
-            acAngularCarritoService.sendMailCancelarCarrito(mensaje, carrito, function(data){
+            acAngularCarritoService.sendMailCancelarCarrito(destinatario, mensaje, function(data){
                 console.log(data);
                 callback(data);
             });
@@ -527,12 +521,12 @@
                 });
         }
 
-        function sendMailCancelarCarrito(mensaje, carrito, callback) {
+        function sendMailCancelarCarrito(destinatario, mensaje, callback) {
             return $http.post(url_mail,
                 {
                     function: 'sendMail',
-                    'mensaje': mensaje,
-                    'carrito_id': carrito.carrito_id
+                    'destinatario': destinatario,
+                    'mensaje': mensaje
                 })
                 .success(function (data) {
                     console.log(data);

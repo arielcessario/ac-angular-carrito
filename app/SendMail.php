@@ -11,11 +11,11 @@ $data = file_get_contents("php://input");
 
 $decoded = json_decode($data);
 
-sendMail($decoded->mensaje, $decoded->carrito_id);
+sendMail($decoded->destinatario, $decoded->mensaje);
 
-function sendMail($mensaje, $carrito_id){
+function sendMail($destinatario, $mensaje){
 
-    $success = mail('mmaneff@gmail.com', "Cancelar Pedido " + $carrito_id, $mensaje, "Cancelar Pedido");
+    $success = mail($destinatario, "Cancelar Pedido ", $mensaje, "Cancelar Pedido");
 
     echo json_encode( $success );
 }
